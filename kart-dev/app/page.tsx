@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Layout, ShoppingCart, Server, ShieldCheck, Zap, Globe } from "lucide-react";
 import Link from "next/link";
 
-// Animation Variants for the "Staggered" effect
+// Animation Variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -22,7 +22,8 @@ const itemVariants = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 100 },
+    // The fix: adding 'as const' tells TypeScript this is a specific animation type
+    transition: { type: "spring" as const, stiffness: 100 },
   },
 };
 
@@ -31,14 +32,15 @@ export default function Home() {
     <main className="min-h-screen bg-white dark:bg-black transition-colors duration-500 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
       <Navbar />
 
-      {/* --- BACKGROUND GRID (The "Premium" Texture) --- */}
-      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05]"
-        style={{ backgroundImage: 'linear-gradient(#888 1px, transparent 1px), linear-gradient(90deg, #888 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
+      {/* --- BACKGROUND GRID --- */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-[0.03] dark:opacity-[0.05]" 
+           style={{ backgroundImage: 'linear-gradient(#888 1px, transparent 1px), linear-gradient(90deg, #888 1px, transparent 1px)', backgroundSize: '40px 40px' }}>
       </div>
 
       {/* --- HERO SECTION --- */}
       <section className="relative pt-24 md:pt-40 pb-20 px-6 max-w-7xl mx-auto min-h-[85vh] flex flex-col justify-center z-10">
-        <motion.div
+        
+        <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -57,17 +59,17 @@ export default function Home() {
 
           {/* Massive Headline */}
           <motion.h1 variants={itemVariants} className="text-6xl md:text-9xl font-bold tracking-tighter mb-8 leading-[0.9]">
-            WE HANDLE <br />
+            WE HANDLE <br/>
             THE <span className="opacity-30">WEB.</span>
           </motion.h1>
 
           <motion.h1 variants={itemVariants} className="text-6xl md:text-9xl font-bold tracking-tighter mb-12 leading-[0.9]">
-            YOU RUN <br />
+            YOU RUN <br/>
             THE <span className="border-b-4 border-black dark:border-white pb-2">BUSINESS.</span>
           </motion.h1>
 
           <motion.p variants={itemVariants} className="text-xl md:text-2xl opacity-60 max-w-2xl mb-16 leading-relaxed font-light">
-            KartDev builds rigorous digital infrastructure.
+            KartDev builds rigorous digital infrastructure. 
             No templates. No hand-holding. Just pure engineering for businesses that want to scale.
           </motion.p>
 
@@ -84,13 +86,13 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* --- SERVICE CARDS (The "Fiverr" Grid) --- */}
+      {/* --- SERVICE CARDS --- */}
       <section className="py-20 px-6 max-w-7xl mx-auto z-10 relative">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
+          
           {/* Service 1 */}
           <Link href="/services">
-            <motion.div
+            <motion.div 
               whileHover={{ y: -10 }}
               className="group h-full p-10 border border-black/10 dark:border-white/10 bg-white dark:bg-neutral-950 rounded-2xl hover:border-black dark:hover:border-white transition-colors duration-300 relative overflow-hidden"
             >
@@ -109,7 +111,7 @@ export default function Home() {
 
           {/* Service 2 */}
           <Link href="/pricing">
-            <motion.div
+            <motion.div 
               whileHover={{ y: -10 }}
               className="group h-full p-10 border border-black/10 dark:border-white/10 bg-white dark:bg-neutral-950 rounded-2xl hover:border-black dark:hover:border-white transition-colors duration-300 relative overflow-hidden"
             >
@@ -128,7 +130,7 @@ export default function Home() {
 
           {/* Service 3 */}
           <Link href="/services">
-            <motion.div
+            <motion.div 
               whileHover={{ y: -10 }}
               className="group h-full p-10 border border-black/10 dark:border-white/10 bg-white dark:bg-neutral-950 rounded-2xl hover:border-black dark:hover:border-white transition-colors duration-300 relative overflow-hidden"
             >
@@ -151,24 +153,24 @@ export default function Home() {
       {/* --- TRUST METRICS --- */}
       <section className="py-24 border-t border-black/5 dark:border-white/5 bg-gray-50 dark:bg-neutral-900/20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-left">
-            <div>
-              <h4 className="text-5xl font-bold mb-2">100%</h4>
-              <p className="font-mono text-xs uppercase opacity-60">Uptime Guarantee</p>
-            </div>
-            <div>
-              <h4 className="text-5xl font-bold mb-2">&lt;1s</h4>
-              <p className="font-mono text-xs uppercase opacity-60">Load Times</p>
-            </div>
-            <div>
-              <h4 className="text-5xl font-bold mb-2">24/7</h4>
-              <p className="font-mono text-xs uppercase opacity-60">System Monitoring</p>
-            </div>
-            <div>
-              <h4 className="text-5xl font-bold mb-2">SECURE</h4>
-              <p className="font-mono text-xs uppercase opacity-60">Payments Integration</p>
-            </div>
-          </div>
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center md:text-left">
+              <div>
+                 <h4 className="text-5xl font-bold mb-2">100%</h4>
+                 <p className="font-mono text-xs uppercase opacity-60">Uptime Guarantee</p>
+              </div>
+              <div>
+                 <h4 className="text-5xl font-bold mb-2">&lt;1s</h4>
+                 <p className="font-mono text-xs uppercase opacity-60">Load Times</p>
+              </div>
+              <div>
+                 <h4 className="text-5xl font-bold mb-2">24/7</h4>
+                 <p className="font-mono text-xs uppercase opacity-60">System Monitoring</p>
+              </div>
+              <div>
+                 <h4 className="text-5xl font-bold mb-2">SECURE</h4>
+                 <p className="font-mono text-xs uppercase opacity-60">Payments Integration</p>
+              </div>
+           </div>
         </div>
       </section>
 
@@ -178,7 +180,7 @@ export default function Home() {
           <div className="md:w-1/3">
             <h2 className="text-4xl font-bold mb-6">Why we exist.</h2>
             <p className="opacity-70 leading-relaxed">
-              Most web agencies are just designers who use templates. KartDev is an engineering firm.
+              Most web agencies are just designers who use templates. KartDev is an engineering firm. 
               We build digital infrastructure that doesn't break when you scale.
             </p>
           </div>
