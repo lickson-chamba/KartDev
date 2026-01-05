@@ -1,8 +1,8 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  // This line allows next-themes to toggle the dark class
-  darkMode: ["class"], 
+  // CORRECTED LINE: just a string, not an array
+  darkMode: "class", 
   
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
